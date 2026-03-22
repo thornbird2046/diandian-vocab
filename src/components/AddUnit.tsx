@@ -58,7 +58,14 @@ export function AddUnit({
             placeholder="e.g. apple, banana, cat, dog... (Separate by comma or newline)"
             className="w-full h-48 p-5 rounded-2xl bg-surface-container border-none focus:ring-2 focus:ring-primary/20 transition-all resize-none outline-none text-on-surface placeholder:text-outline/50"
           />
-          <p className="text-[10px] text-outline/70 ml-1">Tip: Add 5-10 words at a time for best results.</p>
+          <div className="flex items-center justify-between px-1">
+            <p className="text-[10px] text-outline/70">Tip: Add 5-10 words at a time for best results.</p>
+            {inputText.split(/[\n,]+/).filter(w => w.trim()).length > 15 && (
+              <p className="text-[10px] text-error font-bold animate-pulse">
+                Word count is high, generation may take longer.
+              </p>
+            )}
+          </div>
         </div>
       </div>
 

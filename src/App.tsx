@@ -174,6 +174,22 @@ export default function App() {
   const handleAddUnit = async (title: string, words: string[]) => {
     if (isSubmittingRef.current) return;
     setSubmitting(true);
+    
+    const messages = [
+      '正在连接 AI 导师...',
+      '正在查询词典和音标...',
+      '正在生成自然拼读拆解...',
+      '正在编写生动的例句...',
+      '正在最后校对内容...',
+      '即将完成，请稍候...'
+    ];
+    let msgIndex = 0;
+    setLoadingMessage(messages[0]);
+    const interval = setInterval(() => {
+      msgIndex = (msgIndex + 1) % messages.length;
+      setLoadingMessage(messages[msgIndex]);
+    }, 2500);
+
     try {
       const wordDetails = await generateWordDetails(words);
       const newUnit: Unit = {
@@ -188,7 +204,9 @@ export default function App() {
     } catch (e) {
       console.error("Failed to generate unit details", e);
     } finally {
+      clearInterval(interval);
       setSubmitting(false);
+      setLoadingMessage('正在生成...');
     }
   };
 
@@ -364,6 +382,7 @@ export default function App() {
   const handleHandwritingRecognize = async (base64Image: string) => {
     if (isSubmittingRef.current || !currentUnit) return;
     setSubmitting(true);
+    setLoadingMessage('正在识别手写文字...');
     try {
       const recognizedText = await recognizeHandwriting(base64Image);
       setQuizInput(recognizedText);
@@ -373,6 +392,7 @@ export default function App() {
       console.error("Handwriting recognition failed", e);
     } finally {
       setSubmitting(false);
+      setLoadingMessage('正在生成...');
     }
   };
 

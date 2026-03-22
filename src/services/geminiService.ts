@@ -1,6 +1,6 @@
 import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || "" });
 
 export interface Example {
   text: string;
@@ -53,11 +53,11 @@ export async function generateWordDetails(items: string[]): Promise<Word[]> {
 ${items.join("\n")}`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-3-flash-preview",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
-      thinkingConfig: { thinkingBudget: 0 },
+      thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
       responseSchema: {
         type: Type.ARRAY,
         items: {
@@ -111,7 +111,7 @@ export async function recognizeHandwriting(base64Image: string): Promise<string>
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
+      model: "gemini-3-flash-preview",
       contents: { parts: [imagePart, { text: prompt }] },
       config: {
         thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }
