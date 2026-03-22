@@ -1,0 +1,5 @@
+{
+  "name": "July's Word Garden",
+  "description": "专为小学生设计的背单词应用，支持家长投喂单词、中英互考、简单例句及自然拼读。",
+  "requestFramePermissions": ["microphone"]
+}

@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Lexend", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Courier Prime", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-primary: #4a654f;
+  --color-on-primary: #e8ffe8;
+  --color-primary-container: #cceace;
+  --color-on-primary-container: #3d5842;
+  
+  --color-secondary: #46627b;
+  --color-secondary-container: #cde5ff;
+  --color-on-secondary-container: #39546d;
+  
+  --color-tertiary: #875143;
+  --color-tertiary-container: #f3ad9c;
+  --color-on-tertiary-container: #5c2d22;
+  
+  --color-error: #a83836;
+  --color-error-container: #fa746f;
+  --color-on-error-container: #6e0a12;
+  
+  --color-background: #fbf9f4;
+  --color-surface: #fbf9f4;
+  --color-on-surface: #31332e;
+  --color-on-surface-variant: #5e6059;
+  
+  --color-surface-container: #efeee7;
+  --color-surface-container-low: #f5f4ed;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #e3e3db;
+  
+  --color-outline: #7a7b75;
+  --color-outline-variant: #b2b2ab;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+}
