@@ -92,20 +92,20 @@ export function QuizMode({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 select-none">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           {onBack && (
             <button 
               onClick={onBack}
-              className="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-full transition-all"
+              className="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-full transition-all pointer-events-auto"
               title="Back"
             >
               <span className="material-symbols-outlined">arrow_back</span>
             </button>
           )}
           <div className={cn(
-            "px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2",
+            "px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 pointer-events-none",
             quizMode.startsWith('quiz') ? "text-primary bg-primary-container" : 
             quizMode === 'review-wrong' ? "text-error bg-error-container" : "text-secondary bg-secondary-container"
           )}>
@@ -118,7 +118,7 @@ export function QuizMode({
         </div>
         <button 
           onClick={onFinish}
-          className="text-xs font-bold text-outline hover:text-on-surface transition-colors flex items-center gap-1"
+          className="text-xs font-bold text-outline hover:text-on-surface transition-colors flex items-center gap-1 pointer-events-auto"
         >
           <span>Skip stage</span>
           <span className="material-symbols-outlined text-sm">skip_next</span>
@@ -173,7 +173,7 @@ export function QuizMode({
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Question Side */}
-          <div className="text-center lg:text-left space-y-8">
+          <div className="text-center lg:text-left space-y-8 pointer-events-none">
             <p className="text-[10px] text-outline font-bold uppercase tracking-[0.2em]">
               {quizMode === 'quiz-cn-en' && 'Write the English word'}
               {quizMode === 'quiz-en-cn' && 'Write the Chinese meaning'}
@@ -298,8 +298,8 @@ export function QuizMode({
                   )}
                 />
 
-                <div className="mt-10 p-6 lg:p-8 bg-surface-container rounded-[2rem] border border-outline-variant/20 shadow-inner">
-                  <h3 className="text-[10px] font-bold text-outline uppercase tracking-[0.2em] mb-6 flex items-center justify-center lg:justify-start gap-2">
+                <div className="mt-10 p-6 lg:p-8 bg-surface-container rounded-[2rem] border border-outline-variant/20 shadow-inner select-none">
+                  <h3 className="text-[10px] font-bold text-outline uppercase tracking-[0.2em] mb-6 flex items-center justify-center lg:justify-start gap-2 pointer-events-none">
                     <span className="material-symbols-outlined text-sm">draw</span>
                     Handwriting Recognition (Optional)
                   </h3>

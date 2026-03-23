@@ -668,8 +668,6 @@ export default function App() {
                   </div>
                 </div>
 
-   
-
                 {/* Review Mistakes - Moved to Bottom */}
                 <div 
                   className="col-span-2 bg-error-container/5 rounded-2xl p-6 flex items-center justify-between border border-outline-variant/10 hover:border-error-container/30 transition-all"
