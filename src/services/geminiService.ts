@@ -114,7 +114,7 @@ export async function recognizeHandwriting(base64Image: string): Promise<string>
       model: "gemini-3-flash-preview",
       contents: { parts: [imagePart, { text: prompt }] },
       config: {
-        thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }
+        thinkingConfig: { thinkingBudget: 0 }
       }
     });
     return response.text?.trim() || "";
