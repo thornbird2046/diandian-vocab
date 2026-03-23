@@ -53,7 +53,7 @@ export async function generateWordDetails(items: string[]): Promise<Word[]> {
 ${items.join("\n")}`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-2.0-flash",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -111,7 +111,7 @@ export async function recognizeHandwriting(base64Image: string): Promise<string>
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.0-flash-lite",
       contents: { parts: [imagePart, { text: prompt }] },
       config: {
         thinkingConfig: { thinkingBudget: 0 }

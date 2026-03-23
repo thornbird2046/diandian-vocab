@@ -44,4 +44,12 @@
 body {
   background-color: var(--color-background);
   color: var(--color-on-surface);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.material-symbols-outlined {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  display: inline-block;
 }

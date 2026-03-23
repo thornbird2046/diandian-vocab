@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 
 interface QuizModeProps {
-  apiKey: string;
   currentUnit: Unit;
   currentIndex: number;
   quizMode: string;
@@ -29,7 +28,6 @@ interface QuizModeProps {
 }
 
 export function QuizMode({
-  apiKey,
   currentUnit,
   currentIndex,
   quizMode,
@@ -240,9 +238,10 @@ export function QuizMode({
                 <div className="space-y-6">
                   <button 
                     onClick={() => word.recordingUrl ? onPlayAudio(word.recordingUrl) : onSpeak(word.word)}
-                    className="w-28 h-28 bg-primary-container text-primary rounded-full flex items-center justify-center mx-auto lg:mx-0 hover:bg-primary-container/70 transition-all active:scale-90 shadow-xl shadow-primary/10"
+                    className="w-28 h-28 bg-primary-container text-primary rounded-full flex items-center justify-center mx-auto lg:mx-0 hover:bg-primary-container/70 transition-all active:scale-90 shadow-xl shadow-primary/10 select-none outline-none active:outline-none"
+                    style={{ WebkitTapHighlightColor: 'transparent' }}
                   >
-                    <span className="material-symbols-outlined text-5xl">
+                    <span className="material-symbols-outlined text-5xl select-none pointer-events-none">
                       {word.recordingUrl ? 'play_arrow' : 'volume_up'}
                     </span>
                   </button>
@@ -264,11 +263,12 @@ export function QuizMode({
                   onTouchStart={onStartRecording}
                   onTouchEnd={onStopRecording}
                   className={cn(
-                    "w-32 h-32 rounded-full flex items-center justify-center transition-all shadow-2xl",
+                    "w-32 h-32 rounded-full flex items-center justify-center transition-all shadow-2xl select-none outline-none active:outline-none",
                     isRecording ? "bg-error scale-110 shadow-error/30" : "bg-primary hover:bg-primary/90 shadow-primary/30"
                   )}
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
-                  <span className="material-symbols-outlined text-5xl text-white">
+                  <span className="material-symbols-outlined text-5xl text-white select-none pointer-events-none">
                     {isRecording ? 'stop' : 'mic'}
                   </span>
                 </button>
@@ -304,12 +304,11 @@ export function QuizMode({
                     Handwriting Recognition (Optional)
                   </h3>
                 <HandwritingCanvas 
-  onRecognize={onHandwritingRecognize}
-  isProcessing={isSubmitting}
-  currentIndex={currentIndex}
-  disabled={isSubmitting || !!feedback}
-  apiKey={apiKey}
-/>
+                  onRecognize={onHandwritingRecognize}
+                  isProcessing={isSubmitting}
+                  currentIndex={currentIndex}
+                  disabled={isSubmitting || !!feedback}
+                />
                 </div>
               </div>
             )}
