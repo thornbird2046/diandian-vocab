@@ -668,22 +668,7 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Dictation */}
-                <div 
-                  onClick={() => learningGoal && startQuiz(learningGoal, 'quiz-cn-en')}
-                  className={cn(
-                    "bg-surface-container-lowest rounded-2xl p-5 flex flex-col items-start justify-between min-h-[140px] active:scale-[0.98] transition-all cursor-pointer border border-transparent hover:border-outline-variant/20",
-                    !learningGoal && "opacity-50 cursor-not-allowed"
-                  )}
-                >
-                  <div className="bg-primary-container/30 p-3 rounded-xl mb-4">
-                    <span className="material-symbols-outlined text-primary text-2xl">keyboard</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-on-surface">Dictation</h3>
-                    <p className="text-on-surface-variant text-xs">Listen and type</p>
-                  </div>
-                </div>
+   
 
                 {/* Review Mistakes - Moved to Bottom */}
                 <div 
