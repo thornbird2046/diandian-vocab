@@ -11,12 +11,11 @@ interface HandwritingCanvasProps {
 export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecognize, isProcessing, currentIndex, disabled }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [hasDrawn, setHasDrawn] = useState(false);
 
   // Clear canvas when currentIndex changes
   useEffect(() => {
     clearCanvas();
-    if (timerRef.current) clearTimeout(timerRef.current);
   }, [currentIndex]);
 
   useEffect(() => {
@@ -72,8 +71,8 @@ export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecogniz
 
   const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
     if (isProcessing || disabled) return;
-    if (timerRef.current) clearTimeout(timerRef.current);
     setIsDrawing(true);
+    setHasDrawn(true);
     const { x, y } = getCoordinates(e);
     const ctx = canvasRef.current?.getContext('2d');
     if (ctx) {
@@ -95,12 +94,6 @@ export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecogniz
   const stopDrawing = () => {
     if (!isDrawing) return;
     setIsDrawing(false);
-    
-    // Auto-recognize after 1.5s of inactivity
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => {
-      handleRecognize();
-    }, 1500);
   };
 
   const clearCanvas = () => {
@@ -109,10 +102,11 @@ export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecogniz
     if (canvas && ctx) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    if (timerRef.current) clearTimeout(timerRef.current);
+    setHasDrawn(false);
   };
 
   const handleRecognize = () => {
+    if (!hasDrawn) return;
     const canvas = canvasRef.current;
     if (canvas) {
       // Scale down image even more for maximum speed
@@ -164,14 +158,22 @@ export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecogniz
           </div>
         )}
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-4">
         <button
           onClick={clearCanvas}
           disabled={isProcessing || disabled}
-          className="px-8 py-3 bg-surface-container text-on-surface-variant rounded-full font-bold hover:bg-surface-container-high transition-all disabled:opacity-50 flex items-center gap-2 active:scale-95 shadow-sm"
+          className="px-6 py-3 bg-surface-container text-on-surface-variant rounded-full font-bold hover:bg-surface-container-high transition-all disabled:opacity-50 flex items-center gap-2 active:scale-95 shadow-sm"
         >
           <span className="material-symbols-outlined text-lg">refresh</span>
-          <span>Clear Canvas</span>
+          <span>Clear</span>
+        </button>
+        <button
+          onClick={handleRecognize}
+          disabled={isProcessing || disabled || !hasDrawn}
+          className="px-8 py-3 bg-primary text-on-primary rounded-full font-bold hover:bg-primary/90 transition-all disabled:opacity-50 flex items-center gap-2 active:scale-95 shadow-lg shadow-primary/20"
+        >
+          <span className="material-symbols-outlined text-lg">check</span>
+          <span>Submit</span>
         </button>
       </div>
     </div>

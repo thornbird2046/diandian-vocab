@@ -69,7 +69,14 @@ export function useUnits() {
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
-        localStorage.setItem('vocab_units', JSON.stringify(units));
+        const unitsToSave = units.map(u => ({
+  ...u,
+  words: u.words.map(w => {
+    const { recordingUrl, recordedAt, ...rest } = w;
+    return rest;
+  })
+}));
+localStorage.setItem('vocab_units', JSON.stringify(unitsToSave));
         localStorage.setItem('vocab_wrong_history', JSON.stringify(wrongWordHistory));
         localStorage.setItem('vocab_active_wrong', JSON.stringify(activeWrongWordIds));
         if (learningGoal) {
