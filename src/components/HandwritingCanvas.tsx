@@ -2,13 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 
 interface HandwritingCanvasProps {
-  onRecognize: (base64Image: string) => void;
+  onRecognize: (base64Image: string, apiKey: string) => void;
   isProcessing: boolean;
   currentIndex: number;
   disabled?: boolean;
+  apiKey: string;  //
 }
 
-export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecognize, isProcessing, currentIndex, disabled }) => {
+export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecognize, isProcessing, currentIndex, disabled, apiKey }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasDrawn, setHasDrawn] = useState(false);
@@ -130,7 +131,7 @@ export const HandwritingCanvas: React.FC<HandwritingCanvasProps> = ({ onRecogniz
         tempCtx.drawImage(canvas, 0, 0, width, height);
         // Use even lower quality jpeg for even smaller payload
         const base64Image = tempCanvas.toDataURL('image/jpeg', 0.3);
-        onRecognize(base64Image);
+      onRecognize(base64Image, apiKey);
       }
     }
   };

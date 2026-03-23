@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 
 interface QuizModeProps {
+  apiKey: string;
   currentUnit: Unit;
   currentIndex: number;
   quizMode: string;
@@ -28,6 +29,7 @@ interface QuizModeProps {
 }
 
 export function QuizMode({
+  apiKey,
   currentUnit,
   currentIndex,
   quizMode,
@@ -301,12 +303,13 @@ export function QuizMode({
                     <span className="material-symbols-outlined text-sm">draw</span>
                     Handwriting Recognition (Optional)
                   </h3>
-                  <HandwritingCanvas 
-                    onRecognize={onHandwritingRecognize}
-                    isProcessing={isSubmitting}
-                    currentIndex={currentIndex}
-                    disabled={isSubmitting || !!feedback}
-                  />
+                <HandwritingCanvas 
+  onRecognize={onHandwritingRecognize}
+  isProcessing={isSubmitting}
+  currentIndex={currentIndex}
+  disabled={isSubmitting || !!feedback}
+  apiKey={apiKey}
+/>
                 </div>
               </div>
             )}

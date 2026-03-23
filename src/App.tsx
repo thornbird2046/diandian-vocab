@@ -384,8 +384,8 @@ export default function App() {
     setSubmitting(true);
     setLoadingMessage('正在识别手写文字...');
     try {
-      const recognizedText = await recognizeHandwriting(base64Image);
-      setQuizInput(recognizedText);
+const recognizedText = await recognizeHandwriting(base64Image, import.meta.env.VITE_GEMINI_API_KEY || ''); 
+   setQuizInput(recognizedText);
       // Process the answer using the shared logic
       processQuizAnswer(recognizedText);
     } catch (e) {
@@ -770,8 +770,9 @@ export default function App() {
           {/* Quiz Modes */}
           {(mode.startsWith('quiz') || mode.startsWith('exercise') || mode === 'review-wrong' || mode === 'record' || mode === 'dictation-self') && currentUnit && (
             <QuizMode 
-              currentUnit={currentUnit}
-              currentIndex={currentIndex}
+            apiKey={import.meta.env.VITE_GEMINI_API_KEY || ''}
+  currentUnit={currentUnit}
+  currentIndex={currentIndex}
               quizMode={mode}
               userInput={quizInput}
               setUserInput={setQuizInput}
