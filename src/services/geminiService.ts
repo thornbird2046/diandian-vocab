@@ -57,7 +57,7 @@ ${items.join("\n")}`;
     contents: prompt,
     config: {
       responseMimeType: "application/json",
-      thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
+      thinkingConfig: { thinkingBudget: 0 },
       responseSchema: {
         type: Type.ARRAY,
         items: {
