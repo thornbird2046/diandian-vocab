@@ -241,6 +241,7 @@ export function VocabularyBook({
                         onMouseUp={(e) => { e.stopPropagation(); onStopRecording(); }}
                         onTouchStart={(e) => { e.stopPropagation(); onRecording(word.id, word.unitId); }}
                         onTouchEnd={(e) => { e.stopPropagation(); onStopRecording(); }}
+                        onClick={(e) => e.stopPropagation()}
                         className={cn(
                           "flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-90",
                           recordingWordId === word.id 

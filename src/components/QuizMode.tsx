@@ -226,7 +226,7 @@ export function QuizMode({
                   {word.recordingUrl && (
                     <button 
                       onClick={() => onPlayAudio(word.recordingUrl!)}
-                      className="flex items-center gap-2 px-6 py-2.5 bg-secondary-container text-on-secondary-container rounded-full font-bold hover:bg-secondary-container/80 transition-all shadow-sm"
+                      className="flex items-center gap-2 px-6 py-2.5 bg-secondary-container text-on-secondary-container rounded-full font-bold hover:bg-secondary-container/80 transition-all shadow-sm pointer-events-auto"
                     >
                       <span className="material-symbols-outlined text-sm">history</span>
                       <span>Play Recording</span>
@@ -238,7 +238,7 @@ export function QuizMode({
                 <div className="space-y-6">
                   <button 
                     onClick={() => word.recordingUrl ? onPlayAudio(word.recordingUrl) : onSpeak(word.word)}
-                    className="w-28 h-28 bg-primary-container text-primary rounded-full flex items-center justify-center mx-auto lg:mx-0 hover:bg-primary-container/70 transition-all active:scale-90 shadow-xl shadow-primary/10 select-none outline-none active:outline-none"
+                    className="w-28 h-28 bg-primary-container text-primary rounded-full flex items-center justify-center mx-auto lg:mx-0 hover:bg-primary-container/70 transition-all active:scale-90 shadow-xl shadow-primary/10 select-none outline-none active:outline-none pointer-events-auto"
                     style={{ WebkitTapHighlightColor: 'transparent' }}
                   >
                     <span className="material-symbols-outlined text-5xl select-none pointer-events-none">
